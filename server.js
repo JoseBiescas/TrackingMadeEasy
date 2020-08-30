@@ -1,6 +1,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const passport = require('passport');
+
+//Import routes
+const users = require('./routes/users');
 
 const app = express();
 
@@ -19,6 +23,15 @@ const db = require('./config/secrets').ATLAS_URI;
 mongoose.connect(db, {useNewUrlParser: true, useUnifiedTopology: true})
     .then(() => console.log("Successfully connected to database"))
     .catch(err => console.log(err));
+
+//passport middlewate
+app.use(passport.initialize());
+
+//passport config
+require('./config/passport')(passport);
+
+//Routes
+app.use('/api/users', users);
 
 const port = process.env.PORT || 5000;
 
