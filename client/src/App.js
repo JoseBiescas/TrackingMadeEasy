@@ -5,16 +5,22 @@ import "./App.css";
 //Components
 import Navbar from "./components/layout/Navbar";
 import Landing from "./components/layout/Landing";
+import Register from "./components/authentication/Register";
+import Login from "./components/authentication/Login";
 
-function App() {
-  return (
-    <Router>
-      <div className="App">
-        <Navbar />
-        <Landing />
-      </div>
-    </Router>
-  );
+class App extends Component {
+  render() {
+    return (
+      <Router>
+        <div className="App">
+          <Navbar />
+          <Route exact path="/" component={Landing} />
+          <Route exact path="/register" component={Register} />
+          <Route exact path="/login" component={Login} />
+        </div>
+      </Router>
+    );
+  }
 }
 
 export default App;

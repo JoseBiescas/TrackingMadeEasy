@@ -10,13 +10,11 @@ class Landing extends Component {
             <h4>
               <b>Tracking Made Easy</b>
             </h4>
-            <b>Build</b> a login/auth app with the{" "}
-              <span style={{ fontFamily: "monospace" }}>MERN</span> stack from
-              scratch
+            <b>Track</b> your project's progess
             <br />
             <div className="col s6">
               <Link
-                to="/regiser"
+                to="/register"
                 style={{
                   width: "140px",
                   borderRadius: "3px",
