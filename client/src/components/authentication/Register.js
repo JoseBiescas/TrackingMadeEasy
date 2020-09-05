@@ -75,11 +75,11 @@ class Register extends Component {
                   id="username"
                   type="text"
                   className={classnames("", {
-                    invalid: errors.name
+                    invalid: errors.username
                   })}
                 />
                 <label style={{color: "black"}} htmlFor="username">Username</label>
-                <span className="red-text">{errors.name}</span>
+                <span className="red-text">{errors.username}</span>
               </div>
               <div className="input-field col s12">
                 <input
