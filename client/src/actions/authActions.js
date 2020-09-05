@@ -3,12 +3,11 @@ import setAuthToken from "../utils/setAuthToken";
 import jwt_decode from "jwt-decode";
 
 import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING } from "./types";
-import { decode } from "jsonwebtoken";
 
 //Register
 export const registerUser = (userData, history) => dispatch => {
     axios
-        .post("/api/users/register", userData)
+        .post("api/users/register", userData)
         .then(res => history.push("/login")) //redirect ot login on successfull registration
         .catch(err => dispatch({
             type: GET_ERRORS,
@@ -19,7 +18,7 @@ export const registerUser = (userData, history) => dispatch => {
 //Login
 export const loginUser = userData => dispatch => {
     axios
-        .post("/api/user/login", userData)
+        .post("api/users/login", userData)
         .then(res => {
             const { token } = res.data;
             localStorage.setItem("jwtToken", token);

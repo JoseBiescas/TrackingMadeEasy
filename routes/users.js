@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const keys = require("../config/secrets");
+const passport = require("passport");
 
 //Load input validation
 const ValidateRegisterInput = require("../validate/register");
@@ -13,11 +14,11 @@ const User = require("../models/User");
 
 //Register route
 router.post("/register", (req, res) => {
-  const { errs, isValid } = ValidateRegisterInput(req.body);
+  const { errors, isValid } = ValidateRegisterInput(req.body);
 
   //Check validation
   if (!isValid) {
-    return res.status(400).json(errs);
+    return res.status(400).json(errors);
   }
 
   User.findOne({ email: req.body.email }).then((user) => {
@@ -47,11 +48,11 @@ router.post("/register", (req, res) => {
 
 //Login route
 router.post("/login", (req, res) => {
-  const { err, isValid } = ValidateLoginInput(req.body);
+  const { errors, isValid } = ValidateLoginInput(req.body);
 
   //Check validation
   if (!isValid) {
-    return res.status(400).json(err);
+    return res.status(400).json(errors);
   }
 
   const email = req.body.email;

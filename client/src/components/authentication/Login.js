@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import { loginUser } from "../../actions/authActions";
-import classnmes from "classnames";
+import classnames from "classnames";
 
 class Login extends Component {
   constructor() {
@@ -45,6 +45,7 @@ class Login extends Component {
     };
     this.props.loginUser(userData);
   };
+  
   render() {
     const { errors } = this.state;
     return (
@@ -72,13 +73,13 @@ class Login extends Component {
                   id="email"
                   type="email"
                   className={classnames("", {
-                    invalid: errors.email || errors.emailnotfound
+                    invalid: errors.email || errors.emailnotFound
                   })}
                 />
                 <label style={{color: "black"}} htmlFor="email">Email</label>
                 <span className="red-text">
                   {errors.email}
-                  {errors.emailnotfound}
+                  {errors.emailnotFound}
                 </span>
               </div>
               <div className="input-field col s12">
