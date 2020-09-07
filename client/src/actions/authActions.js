@@ -1,3 +1,12 @@
+/* 
+authActions.js (actions)
+
+Import action defitions from types.js
+Uses axios to make HTTP Requests
+Use dispatch to send our actions to our reducers.
+
+*/
+
 import axios from "axios";
 import setAuthToken from "../utils/setAuthToken";
 import jwt_decode from "jwt-decode";
@@ -25,9 +34,9 @@ export const loginUser = userData => dispatch => {
 
             setAuthToken(token);
 
-            const decoded =jwt_decode(token);
+            const decoded = jwt_decode(token);
 
-            dispatch(setCurrentUser(decoded));
+            dispatch(setCurrentUser(decoded)); //Sending action to reducer
         })
         .catch(err => dispatch({
             type: GET_ERRORS,

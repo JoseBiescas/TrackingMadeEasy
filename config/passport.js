@@ -1,3 +1,18 @@
+/*
+passport.js
+
+When a user visits a protected route,they will attach their JWT to the HTTP 
+Authorization header.
+
+passport-jwt will grab that value and parse it using the 
+ExtractJwt.fromAuthHeaderAsBearerToken method.
+
+passport-jwt will take the extracted JWT along with the options
+we set an call jsonwebtoken library's verify method.
+
+
+*/
+
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 const mongoose = require('mongoose');

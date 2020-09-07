@@ -6,6 +6,7 @@ const passport = require('passport');
 //Import routes
 const users = require('./routes/users');
 
+//Initialize app using Express
 const app = express();
 
 //Bodyparser
@@ -16,7 +17,6 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 //Db 
-
 const db = require('./config/secrets').ATLAS_URI;
 
 //Connect to db

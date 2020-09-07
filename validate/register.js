@@ -1,3 +1,15 @@
+/*
+register.js (validator)
+
+Export a function call validateRegisterInput
+which takes 'data' as its' parameter. 'data'
+will be received from the Front End form for
+the register page.
+
+Returns:
+    errors: (dictionary) containing any errors.
+    isValid: (boolean) checks if we have any errors or not.
+*/
 const Validator = require('validator');
 const isEmpty = require('is-empty');
 

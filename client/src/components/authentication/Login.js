@@ -1,3 +1,5 @@
+/*
+*/
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
@@ -48,6 +50,7 @@ class Login extends Component {
   
   render() {
     const { errors } = this.state;
+    //Same as const errors = this.state.errors;
     return (
       <div className="container">
         <div style={{ marginTop: "4rem" }} className="row">
@@ -121,17 +124,20 @@ class Login extends Component {
   }
 }
 
+//Login property types
 Login.propTypes = {
   loginUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
 };
 
+//Allows us to get our state from Redux and map it to props which we can use inside components
 const mapStateToProps = state => ({
   auth: state.auth,
   errors: state.errors
 });
 
+// connect() connects our React component to our Redux store.
 export default connect(
   mapStateToProps,
   { loginUser }

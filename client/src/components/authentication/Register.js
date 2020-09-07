@@ -1,3 +1,9 @@
+/*
+Register.js (component/authentication)
+
+Register component for Front End.
+*/
+
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
@@ -56,7 +62,7 @@ class Register extends Component {
 
   render() {
     const { errors } = this.state;
-
+    //Same as const errors = this.state.errors;
     return (
       <div className="container">
         <div className="row">
@@ -152,18 +158,27 @@ class Register extends Component {
   }
 }
 
+//Register property types
 Register.propTypes = {
   registerUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
 };
 
+//Allows us to get our state from Redux and map it to props which we can use inside components
 const mapStateToProps = state => ({
   auth: state.auth,
   errors: state.errors
 });
 
+// connect() connects our React component to our Redux store.
 export default connect(
   mapStateToProps,
   { registerUser }
 ) (withRouter(Register));
+ /*
+ Since we can't redirect from within an action,
+ Wrap Register with withRouter() and add the param this.props.history
+ to allow our action (registerUser) to redirect us to another page when 
+ the registration process is complete.
+ */

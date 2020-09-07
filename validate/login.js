@@ -1,3 +1,15 @@
+/*
+login.js (validator)
+
+Export a function called validateLoginInput
+which takes 'data' as its' parameter. 'data' 
+will be received from the Front End login form 
+and parsed here.
+
+Returns:
+    errors: (dictionary) containing all errors if any.
+    isValid: (boolean) checks if we have any errors or not.
+*/
 const Validator = require('validator');
 const isEmpty = require('is-empty');
 

@@ -1,3 +1,9 @@
+/*
+Reducers specify how the application state
+should change in response to an action.
+Reducers respond with the new state, which is 
+passed to our store and, in turn, our UI.
+*/
 import {
     SET_CURRENT_USER,
     USER_LOADING 
