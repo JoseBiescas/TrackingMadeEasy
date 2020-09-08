@@ -5,6 +5,7 @@ const passport = require('passport');
 
 //Import routes
 const users = require('./routes/users');
+const cards = require('./routes/cards');
 
 //Initialize app using Express
 const app = express();
@@ -32,6 +33,7 @@ require('./config/passport')(passport);
 
 //Routes
 app.use('/api/users', users);
+app.use('/api/cards', cards);
 
 const port = process.env.PORT || 5000;
 
