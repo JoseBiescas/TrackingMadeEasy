@@ -18,7 +18,7 @@ module.exports = function validateCardInput(data) {
     data.title = !isEmpty(data.title) ? data.title : "";
 
     //Check title
-    if (Validator.isLength(data.title, {min: 3, max: 40})) {
+    if (isEmpty(data.title)) {
         errors.title = "Title field is required";
     }
 

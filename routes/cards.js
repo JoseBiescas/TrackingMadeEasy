@@ -15,18 +15,19 @@ const router = express.Router();
 //Load Card model
 const Card = require("../models/Cards");
 
+//Load validator
+const valdiateCardInput = require("../validate/card");
+
 //Create route
 router.post("/create", (req, res) => {
   //pull errors from Card Validator
-  const { errors, isValid } = ValdiateCardInput(req.body);
+  const { errors, isValid } = valdiateCardInput(req.body);
 
   if (!isValid) {
     return res.status(400).json(errors);
   } else {
     const USER = {
-      id: req.user.id,
-      username: req.user.username,
-      email: req.user.email,
+      user: req.body.user
     };
 
     const newCard = new Card({
@@ -39,6 +40,8 @@ router.post("/create", (req, res) => {
     newCard
       .save()
       .then(() => res.json("New Card Created"))
-      .catch((err) => res.status(400).json("Error: " + err));
+      .catch((err) => res.status(400).json("Error in Card create action: " + err));
   }
 });
+
+module.exports = router

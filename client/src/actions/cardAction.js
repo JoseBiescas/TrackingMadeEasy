@@ -12,10 +12,10 @@ import axios from "axios";
 import { CREATE_CARD, CARDS_LOADING } from "./types";
 
 //Create Task
-export const createCard = (cardData) => (dispatch) => {
+export const createCard = cardData => dispatch => {
   axios
     .post("/api/cards/create", cardData)
-    .then((res) =>
+    .then(res =>
       dispatch({
         type: CREATE_CARD,
         payload: res.data,

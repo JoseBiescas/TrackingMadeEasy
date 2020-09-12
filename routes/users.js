@@ -85,6 +85,7 @@ router.post("/login", (req, res) => {
         const payload = {
           id: user.id,
           username: user.username,
+          email: user.email
         };
 
         //Sign our jwt, and include our payload, secret key and an expiresIn param.

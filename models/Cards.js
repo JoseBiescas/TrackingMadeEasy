@@ -5,8 +5,7 @@ const Schema = mongoose.Schema;
 const CardSchema = new Schema(
     {
         user: {
-            type: Schema.Types.ObjectId, //Might be just "Object"
-            ref: "user",
+            type: Object, //Might be just "Object" type: Schema.Types.ObjectId
             required: true
         },
         title: {
