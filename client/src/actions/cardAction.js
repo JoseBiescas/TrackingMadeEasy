@@ -9,7 +9,7 @@ Use dispatch to send our actions to our reducers.
 
 import axios from "axios";
 
-import { CREATE_CARD, CARDS_LOADING, GET_CARDS } from "./types";
+import { CREATE_CARD, CARDS_LOADING, GET_CARDS, DELETE_CARD } from "./types";
 
 //Create Task
 export const createCard = (cardData) => (dispatch) => {
@@ -42,6 +42,19 @@ export const getCards = (userID) => (dispatch) => {
       })
     );
 };
+
+//Delete Card
+export const deleteCard = (cardID) => (dispatch) => {
+  axios
+    .delete(`/api/cards/delete-card/${cardID}`)
+    .then(res =>
+      dispatch({
+        type: DELETE_CARD,
+        payload: cardID
+      })
+      )
+      .catch(err=> console.log(err))
+}
 
 // Cards loading
 export const setCardsLoading = () => {

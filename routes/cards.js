@@ -50,4 +50,11 @@ router.get("/view-cards", (req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
+//Delete route
+router.delete("/delete-card/:id", (req, res) => {
+  Card.findById(req.params.id).then((card) => {
+    card.remove().then(() => res.json("Card deleted"));
+  }).catch(err => res.status(400).json("Error: " + err));
+});
+
 module.exports = router;
