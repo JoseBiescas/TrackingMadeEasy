@@ -26,7 +26,6 @@ router.post("/create", (req, res) => {
   if (!isValid) {
     return res.status(400).json(errors);
   } else {
-
     const newCard = new Card({
       user: req.body.user,
       title: req.body.title,
@@ -37,8 +36,18 @@ router.post("/create", (req, res) => {
     newCard
       .save()
       .then(() => res.json("New Card Created"))
-      .catch((err) => res.status(400).json("Error in Card create action: " + err));
+      .catch((err) =>
+        res.status(400).json("Error in Card create action: " + err)
+      );
   }
 });
 
-module.exports = router
+//Get route
+router.get("/view-cards", (req, res) => {
+  const user_id = req.body.user;
+  Card.find({ user: user_id })
+    .then((cards) => res.json(cards))
+    .catch((err) => res.status(400).json("Error: " + err));
+});
+
+module.exports = router;

@@ -9,3 +9,4 @@ export const CREATE_CARD = "CREATE_CARD";
 export const DELETE_CARD = "DELETE_CARD";
 export const UDPDATE_CARD = "UPDATE CARD";
 export const CARDS_LOADING = "CARDS_LOADING";
+export const GET_CARDS = "GET_CARDS";
