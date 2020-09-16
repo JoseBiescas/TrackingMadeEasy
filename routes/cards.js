@@ -26,12 +26,9 @@ router.post("/create", (req, res) => {
   if (!isValid) {
     return res.status(400).json(errors);
   } else {
-    const USER = {
-      user: req.body.user
-    };
 
     const newCard = new Card({
-      user: USER,
+      user: req.body.user,
       title: req.body.title,
       description: req.body.description,
       labels: req.body.labels,

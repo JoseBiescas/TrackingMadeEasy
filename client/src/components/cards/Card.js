@@ -45,12 +45,12 @@ class Card extends Component {
   onSubmit = (e) => {
     e.preventDefault();
     const cardData = {
-      user: this.props.auth.user,
+      user: this.props.auth.user.id,
       title: this.state.title,
       description: this.state.description,
       labels: this.state.labels,
     };
-    console.log(typeof(cardData.user))
+
     this.props.createCard(cardData, this.props.history);
   };
 

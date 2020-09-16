@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 const CardSchema = new Schema(
     {
         user: {
-            type: Object, //Might be just "Object" type: Schema.Types.ObjectId
+            type: String, //Might be just "Object" type: Schema.Types.ObjectId
             required: true
         },
         title: {
