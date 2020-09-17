@@ -3,6 +3,10 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 
+// import { BrowserRouter as Router, Route, Switch, withRouter } from "react-router-dom";
+
+// import Card from "../cards/Card";
+
 class Dashboard extends Component {
   onLogoutClick = (e) => {
     e.preventDefault();

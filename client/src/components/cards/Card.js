@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { createCard } from "../../actions/cardAction";
+import { Link, withRouter } from "react-router-dom";
 
 class Card extends Component {
   constructor() {
@@ -61,6 +62,10 @@ class Card extends Component {
       <div className="container">
         <div style={{ marginTop: "4rem" }} className="row">
           <div className="col s8 offset-s2">
+            <Link to="/dashboard" className="btn-flat waves-effect">
+              <i className="material-icons left">keyboard_backspace</i>
+              Back to Dashboard
+            </Link>
             <div className="col s12" style={{ paddingLeft: "11.250px" }}>
               <h4>
                 <b>Create</b> Card
@@ -133,4 +138,4 @@ const mapStateToProps = (state) => ({
   errors: state.errors,
 });
 
-export default connect(mapStateToProps, { createCard })(Card);
+export default connect(mapStateToProps, { createCard })( withRouter(Card));

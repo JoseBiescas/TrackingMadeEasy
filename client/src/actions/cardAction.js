@@ -14,18 +14,19 @@ import {
   CARDS_LOADING,
   GET_CARDS,
   DELETE_CARD,
-  UDPDATE_CARD,
+  UPDATE_CARD,
 } from "./types";
 
 //Create Task
-export const createCard = (cardData) => (dispatch) => {
+export const createCard = (cardData, history) => (dispatch) => {
   axios
     .post("/api/cards/create", cardData)
     .then((res) =>
       dispatch({
         type: CREATE_CARD,
         payload: res.data,
-      })
+      }),
+      history.push("/dashboard")
     )
     .catch((err) => console.log(err));
 };
@@ -68,7 +69,7 @@ export const updateCard = (cardData, cardID) => (dispatch) => {
     .patch(`/api/cards/update-card/${cardID}`, cardData)
     .then((res) =>
       dispatch({
-        type: UDPDATE_CARD,
+        type: UPDATE_CARD,
         payload: res.data,
       })
     )
