@@ -52,9 +52,34 @@ router.get("/view-cards", (req, res) => {
 
 //Delete route
 router.delete("/delete-card/:id", (req, res) => {
-  Card.findById(req.params.id).then((card) => {
-    card.remove().then(() => res.json("Card deleted"));
-  }).catch(err => res.status(400).json("Error: " + err));
+  Card.findById(req.params.id)
+    .then((card) => {
+      card.remove().then(() => res.json("Card deleted"));
+    })
+    .catch((err) => res.status(400).json("Error: " + err));
+});
+
+//Update route
+router.patch("/update-card/:id", (req, res) => {
+  const updateFields = {};
+  if (req.body.title != null) {
+    updateFields.title = req.body.title;
+  }
+  if (req.body.description != null) {
+    updateFields.description = req.body.description;
+  }
+  if (req.body.labels != null) {
+    updateFields.labels = req.body.labels;
+  }
+  Card.findByIdAndUpdate(
+    { _id: req.params.id },
+    { $set: updateFields },
+    { new: true }
+  )
+    .then((card) => {
+      res.json(card);
+    })
+    .catch((err) => res.status(400).json("Error: " + err));
 });
 
 module.exports = router;
