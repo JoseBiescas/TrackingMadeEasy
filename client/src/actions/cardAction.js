@@ -35,7 +35,7 @@ export const createCard = (cardData, history) => (dispatch) => {
 export const getCards = (userID) => (dispatch) => {
   dispatch(setCardsLoading());
   axios
-    .get("/api/cards/view-cards", userID)
+    .get(`/api/cards/view-cards/${userID}`)
     .then((res) =>
       dispatch({
         type: GET_CARDS,

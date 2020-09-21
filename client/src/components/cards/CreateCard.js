@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { createCard } from "../../actions/cardAction";
 import { Link, withRouter } from "react-router-dom";
 
-class Card extends Component {
+class CreateCard extends Component {
   constructor() {
     super();
 
@@ -21,7 +21,7 @@ class Card extends Component {
   }
 
   componentDidMount() {
-    // If logged in and user navigates to Login page, should redirect them to dashboard
+    // If not logged in and user navigates to Dashboard page, should redirect them to login
     if (!this.props.auth.isAuthenticated) {
       this.props.history.push("/login");
     }
@@ -127,7 +127,7 @@ class Card extends Component {
   }
 }
 
-Card.propTypes = {
+CreateCard.propTypes = {
   createCard: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
@@ -138,4 +138,4 @@ const mapStateToProps = (state) => ({
   errors: state.errors,
 });
 
-export default connect(mapStateToProps, { createCard })( withRouter(Card));
+export default connect(mapStateToProps, { createCard })( withRouter(CreateCard));

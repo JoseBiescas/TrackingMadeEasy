@@ -12,7 +12,8 @@ import store from "./store";
 import Navbar from "./components/layout/Navbar";
 import Landing from "./components/layout/Landing";
 import Register from "./components/authentication/Register";
-import Card from "./components/cards/Card";
+import CreateCard from "./components/cards/CreateCard";
+import ViewCard from "./components/cards/ViewCard";
 import Login from "./components/authentication/Login";
 import Dashboard from "./components/dashboard/Dashboard";
 import PrivateRoute from "./components/private-route/PrivateRoute";
@@ -49,7 +50,8 @@ class App extends Component {
             <Route exact path="/login" component={Login} />
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
-              <PrivateRoute exact path="/create" component={Card} />
+              <PrivateRoute exact path="/create" component={CreateCard} />
+              <PrivateRoute exact path="/view" component={ViewCard} />
             </Switch>
           </div>
         </Router>

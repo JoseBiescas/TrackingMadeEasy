@@ -1,3 +1,4 @@
+const { json } = require("body-parser");
 /*
 cards.js (routes)
 
@@ -44,10 +45,10 @@ router.post("/create", passport.authenticate("jwt", { session: false }), (req, r
 });
 
 //Get route
-router.get("/view-cards", passport.authenticate("jwt", { session: false }), (req, res) => {
-  const user_id = req.body.user;
+router.get("/view-cards/:user", (req, res) => {
+  const user_id = req.params.user;
   Card.find({ user: user_id })
-    .then((cards) => res.json(cards))
+    .then(cards => res.json(cards))
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
