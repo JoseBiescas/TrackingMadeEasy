@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getCards } from "../../actions/cardAction";
+import { getCards, deleteCard } from "../../actions/cardAction";
 
 class ViewCard extends Component {
   
@@ -11,19 +11,27 @@ class ViewCard extends Component {
     this.props.getCards(this.props.auth.user.id);
   }
 
+  onDelete = (e) => {
+      e.preventDefault();
+      this.props.deleteCard(e.target.value);
+  }
+
   render() {
       let cardList = this.props.cards.map(card => (
           <div className="card" key={card._id}>
+            <div className="delete-btn" >
+              <button
+                className="btn btn-danger red waves-effect"
+                value= {card._id}
+                onClick={this.onDelete}
+              >
+                Delete
+              </button>
+            </div>
             <h3>{card.title}</h3>
             <p>{card.description}</p>
           </div>
       ))
-      // for (const key in this.props.cards.data) {
-      //     <div className="card" >
-      //       <h3>{this.props.cards.data[key].title}</h3>
-      //       <p>{this.props.cards.data[key].description}</p>
-      //     </div>
-      // }
       return (
           <div className="container">
             <h1>Cards</h1>
@@ -41,4 +49,4 @@ const mapStateToProps = (state) => ({
 });
 
 // export default connect(mapStateToProps, { getCards })(withRouter(ViewCard));
-export default connect(mapStateToProps, { getCards })(ViewCard);
+export default connect(mapStateToProps, { getCards, deleteCard })(ViewCard);
