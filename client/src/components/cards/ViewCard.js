@@ -1,50 +1,44 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getCards } from "../../actions/cardAction";
-import { Link, withRouter } from "react-router-dom";
 
 class ViewCard extends Component {
-  constructor() {
-    super();
-
-    this.state = {
-      cards: [],
-      errors: {},
-    };
-  }
+  
   componentDidMount() {
     if (!this.props.auth.isAuthenticated) {
       this.props.history.push("/login");
     }
-    this.props.getCards(this.props.auth.user.id)
-    console.log(this.props)
+    this.props.getCards(this.props.auth.user.id);
   }
 
   render() {
-      // const { cards } = this.props.cards;
-      
-      // let cardList = cards.map((card, index) => (
-      //     <div className="card" key={card._id}>
+      let cardList = this.props.cards.map(card => (
+          <div className="card" key={card._id}>
+            <h3>{card.title}</h3>
+            <p>{card.description}</p>
+          </div>
+      ))
+      // for (const key in this.props.cards.data) {
+      //     <div className="card" >
+      //       <h3>{this.props.cards.data[key].title}</h3>
+      //       <p>{this.props.cards.data[key].description}</p>
       //     </div>
-      // ))
+      // }
       return (
           <div className="container">
+            <h1>Cards</h1>
+            {cardList}
           </div>
       )
   }
 }
 
-ViewCard.propTypes = {
-  getCards: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired,
-};
-
+// Get state from redux and map it to properties of component
 const mapStateToProps = (state) => ({
   auth: state.auth,
   errors: state.errors,
-  cards: state.cards
+  cards: state.cards.cards // name: state.cardReducerName in root.cardReducer
 });
 
-export default connect(mapStateToProps, { getCards })(withRouter(ViewCard));
+// export default connect(mapStateToProps, { getCards })(withRouter(ViewCard));
+export default connect(mapStateToProps, { getCards })(ViewCard);

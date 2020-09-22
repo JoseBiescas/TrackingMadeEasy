@@ -36,10 +36,10 @@ export const getCards = (userID) => (dispatch) => {
   dispatch(setCardsLoading());
   axios
     .get(`/api/cards/view-cards/${userID}`)
-    .then((res) =>
+    .then((cards) =>
       dispatch({
         type: GET_CARDS,
-        payload: res.data,
+        payload: cards.data,
       })
     )
     .catch((err) =>

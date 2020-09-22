@@ -37,7 +37,7 @@ router.post("/create", passport.authenticate("jwt", { session: false }), (req, r
 
     newCard
       .save()
-      .then(() => res.json("New Card Created"))
+      .then(card => res.json(card))
       .catch((err) =>
         res.status(400).json("Error in Card create action: " + err)
       );
