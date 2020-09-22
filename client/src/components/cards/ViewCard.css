@@ -1,0 +1,37 @@
+.card {
+    position: relative; /* All others will be absolutely positioned to card */
+    background-color: rgb(175, 253, 178);
+    border-radius: 20px;
+    width: auto;
+    height: auto;
+    margin: auto;
+}
+
+.card .delete-btn {
+    position: relative;
+    text-align: center;
+}
+
+.card .delete-btn .btn {
+    position: absolute;
+    width: auto;
+    height: auto;
+    border-radius: 50%;
+    right: 0px;
+}
+
+.card .title {
+    position: relative;
+    margin: auto;
+    width: auto;
+    height: auto;
+    left: 10px;
+}
+
+.card .description {
+    position: relative;
+    margin: auto;
+    width: auto;
+    height: auto;
+    left: 20px;
+}
