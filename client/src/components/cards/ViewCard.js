@@ -4,6 +4,7 @@ import { getCards, deleteCard } from "../../actions/cardAction";
 import { Link } from "react-router-dom";
 
 import "./ViewCard.css";
+import Loader from "../loader/Loader";
 
 class ViewCard extends Component {
   componentDidMount() {
@@ -19,25 +20,32 @@ class ViewCard extends Component {
   };
 
   render() {
-    let cardList = this.props.cards.map((card) => (
-      <div className="card" key={card._id}>
-        <div className="delete-btn">
-          <button
-            className="btn btn-danger black waves-effect"
-            value={card._id}
-            onClick={this.onDelete}
-          >
-            X
-          </button>
+    let content;
+    if (this.props.cardsLoading) {
+        content = <Loader />;
+    }
+    else {
+      content = this.props.cards.map((card) => (
+        <div className="card" key={card._id}>
+          <div className="delete-btn">
+            <button
+              className="btn btn-danger black waves-effect"
+              value={card._id}
+              onClick={this.onDelete}
+            >
+              X
+            </button>
+          </div>
+          <div className="title">
+            <h3>{card.title}</h3>
+          </div>
+          <div className="description">
+            <p>{card.description}</p>
+          </div>
         </div>
-        <div className="title">
-          <h3>{card.title}</h3>
-        </div>
-        <div className="description">
-          <p>{card.description}</p>
-        </div>
-      </div>
-    ));
+      ));
+    }
+    
     return (
       <div className="container">
         <Link to="/dashboard" className="btn-flat waves-effect">
@@ -45,7 +53,7 @@ class ViewCard extends Component {
           Back to Dashboard
         </Link>
         <h1>Cards</h1>
-        {cardList}
+        {content}
       </div>
     );
   }
@@ -56,6 +64,7 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
   errors: state.errors,
   cards: state.cards.cards, // name: state.cardReducerName in root.cardReducer
+  cardsLoading: state.cards.cardsLoading
 });
 
 // export default connect(mapStateToProps, { getCards })(withRouter(ViewCard));
