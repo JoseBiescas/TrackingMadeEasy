@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getCards, deleteCard } from "../../actions/cardAction";
+import { Link } from "react-router-dom";
 
 import "./ViewCard.css";
 
@@ -22,7 +23,7 @@ class ViewCard extends Component {
       <div className="card" key={card._id}>
         <div className="delete-btn">
           <button
-            className="btn btn-danger red waves-effect"
+            className="btn btn-danger black waves-effect"
             value={card._id}
             onClick={this.onDelete}
           >
@@ -39,6 +40,10 @@ class ViewCard extends Component {
     ));
     return (
       <div className="container">
+        <Link to="/dashboard" className="btn-flat waves-effect">
+          <i className="material-icons left">keyboard_backspace</i>
+          Back to Dashboard
+        </Link>
         <h1>Cards</h1>
         {cardList}
       </div>
