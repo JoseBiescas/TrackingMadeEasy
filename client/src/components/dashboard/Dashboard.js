@@ -25,7 +25,7 @@ class Dashboard extends Component {
     const { user } = this.props.auth;
 
     return (
-      <div className="container valign-wrapper">
+      <div className="dashboard-container valign-wrapper">
         <div className="row">
           <div className="col s12 center-align">
             <h4>

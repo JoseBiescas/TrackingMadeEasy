@@ -47,7 +47,7 @@ class ViewCard extends Component {
     }
     
     return (
-      <div className="container">
+      <div className="card-container">
         <Link to="/dashboard" className="btn-flat waves-effect">
           <i className="material-icons left">keyboard_backspace</i>
           Back to Dashboard

@@ -61,7 +61,7 @@ class CreateCard extends Component {
     // const { user } = this.props.auth;
     // const { errors } = this.state;
     return (
-      <div className="container">
+      <div className="create-container">
         <div className="row">
           <div className="col s8 offset-s2">
             <Link to="/dashboard" className="btn-flat waves-effect">
