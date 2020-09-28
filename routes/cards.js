@@ -1,3 +1,4 @@
+const { json } = require("body-parser");
 /*
 cards.js (routes)
 
@@ -10,6 +11,7 @@ Routes:
 */
 
 const express = require("express");
+const passport = require("passport");
 const router = express.Router();
 
 //Load Card model
@@ -19,7 +21,7 @@ const Card = require("../models/Cards");
 const valdiateCardInput = require("../validate/card");
 
 //Create route
-router.post("/create", (req, res) => {
+router.post("/create", passport.authenticate("jwt", { session: false }), (req, res) => {
   //pull errors from Card Validator
   const { errors, isValid } = valdiateCardInput(req.body);
 
@@ -35,7 +37,7 @@ router.post("/create", (req, res) => {
 
     newCard
       .save()
-      .then(() => res.json("New Card Created"))
+      .then(card => res.json(card))
       .catch((err) =>
         res.status(400).json("Error in Card create action: " + err)
       );
@@ -43,15 +45,15 @@ router.post("/create", (req, res) => {
 });
 
 //Get route
-router.get("/view-cards", (req, res) => {
-  const user_id = req.body.user;
+router.get("/view-cards/:user", (req, res) => {
+  const user_id = req.params.user;
   Card.find({ user: user_id })
-    .then((cards) => res.json(cards))
+    .then(cards => res.json(cards))
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
 //Delete route
-router.delete("/delete-card/:id", (req, res) => {
+router.delete("/delete-card/:id", passport.authenticate("jwt", { session: false }), (req, res) => {
   Card.findById(req.params.id)
     .then((card) => {
       card.remove().then(() => res.json("Card deleted"));
@@ -60,7 +62,7 @@ router.delete("/delete-card/:id", (req, res) => {
 });
 
 //Update route
-router.patch("/update-card/:id", (req, res) => {
+router.patch("/update-card/:id", passport.authenticate("jwt", { session: false }), (req, res) => {
   const updateFields = {};
   if (req.body.title != null) {
     updateFields.title = req.body.title;

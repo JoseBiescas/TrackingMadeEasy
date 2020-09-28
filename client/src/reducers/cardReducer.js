@@ -2,7 +2,8 @@ import {
     CREATE_CARD,
     DELETE_CARD,
     UPDATE_CARD,
-    CARDS_LOADING
+    CARDS_LOADING,
+    GET_CARDS
 } from "../actions/types";
 
 const initialState ={
@@ -17,10 +18,30 @@ export default function(state = initialState, action) {
                 ...state,
                 cards: [action.payload, ...state.cards]
             };
+        case GET_CARDS:
+            return {
+                ...state,
+                cards: action.payload,
+                cardsLoading: false
+            };
         case CARDS_LOADING:
             return {
                 ...state,
                 cardsLoading: true
+            };
+        case DELETE_CARD:
+            return {
+                ...state,
+                cards: state.cards.filter(card => card._id !== action.payload)
+            };
+        case UPDATE_CARD:
+            let index = state.cards.findIndex(
+                card => card._id === action.payload._id
+            );
+            state.cards.splice(index, 1);
+            return {
+                ...state,
+                cards: [action.payload, ...state.cards]
             };
         default:
             return state;
