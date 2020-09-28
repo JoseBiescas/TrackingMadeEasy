@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import { createCard } from "../../actions/cardAction";
 import { Link, withRouter } from "react-router-dom";
 
+import "./CreateCard.css";
+
 class CreateCard extends Component {
   constructor() {
     super();
@@ -60,13 +62,13 @@ class CreateCard extends Component {
     // const { errors } = this.state;
     return (
       <div className="container">
-        <div style={{ marginTop: "4rem" }} className="row">
+        <div className="row">
           <div className="col s8 offset-s2">
             <Link to="/dashboard" className="btn-flat waves-effect">
               <i className="material-icons left">keyboard_backspace</i>
               Back to Dashboard
             </Link>
-            <div className="col s12" style={{ paddingLeft: "11.250px" }}>
+            <div className="col s12">
               <h4>
                 <b>Create</b> Card
               </h4>

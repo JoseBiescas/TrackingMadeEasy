@@ -1,0 +1,13 @@
+.container {
+    background-color: skyblue;
+    border-radius: 10%;
+    width: 700px;
+}
+
+.container .row {
+    margin-top: 4rem;
+}
+
+.container .row .col.s8.offset-s2 .col.s12{
+    padding-left: 11.250px;
+}
