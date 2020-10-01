@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 //Db 
-const db = require('./config/secrets').ATLAS_URI;
+const db = process.env.MONGODB_URI || require('./config/secrets').ATLAS_URI;
 
 //Connect to db
 mongoose.connect(db, {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify : false})
