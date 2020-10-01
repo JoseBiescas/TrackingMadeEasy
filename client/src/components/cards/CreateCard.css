@@ -1,6 +1,7 @@
 .create-container {
+    margin: auto;
     border-radius: 10%;
-    width: 700px;
+    width: 75vw;
 }
 
 .create-container .row {

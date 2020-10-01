@@ -1,3 +1,9 @@
+.card-container {
+    width: 75vw;
+    height: auto;
+    margin: auto;
+}
+
 .card {
     position: relative; /* All others will be absolutely positioned to card */
     background-color: rgb(175, 253, 178);
