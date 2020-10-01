@@ -37,5 +37,9 @@ app.use('/api/cards', cards);
 
 const port = process.env.PORT || 5000;
 
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static('client/build'));
+}
+
 //Listen to port
 app.listen(port, () => console.log(`Server running on port ${port}`));
