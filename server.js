@@ -1,7 +1,9 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const passport = require('passport');
+const path = require('path');
 
 //Import routes
 const users = require('./routes/users');
@@ -18,7 +20,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 //Db 
-const db = process.env.MONGODB_URI || require('./config/secrets').ATLAS_URI;
+const db = process.env.MONGODB_URI || process.env.ATLAS_URI;
 
 //Connect to db
 mongoose.connect(db, {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify : false})
@@ -39,6 +41,10 @@ const port = process.env.PORT || 5000;
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'));
+
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    })
 }
 
 //Listen to port

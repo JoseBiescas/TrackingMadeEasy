@@ -12,8 +12,8 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const keys = require("../config/secrets");
 const passport = require("passport");
+require('dotenv').config();
 
 //Load input validation
 const ValidateRegisterInput = require("../validate/register");
@@ -91,7 +91,7 @@ router.post("/login", (req, res) => {
         //Sign our jwt, and include our payload, secret key and an expiresIn param.
         jwt.sign(
           payload,
-          keys.secreOrKey,
+          process.env.secretOrKey,
           {
             expiresIn: 31556926,
           },
