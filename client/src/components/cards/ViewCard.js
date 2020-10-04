@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getCards, deleteCard, updateCard } from "../../actions/cardAction";
+import { getCards, deleteCard } from "../../actions/cardAction";
 import { Link } from "react-router-dom";
 import UpdateCard from "./UpdateCard";
 
@@ -11,7 +11,8 @@ class ViewCard extends Component {
   constructor() {
     super();
     this.state = {
-      modal: false
+      modal: false,
+      card: null
     }
   }
   componentDidMount() {
@@ -28,19 +29,21 @@ class ViewCard extends Component {
 
   toggleModal = (e) => {
     e.preventDefault();
-    this.setState({modal: !this.state.modal})
+    this.setState({modal: !this.state.modal, card: e.target.value})
   }
 
   render() {
     let content;
+    let modal;
     if (this.props.cardsLoading) {
         content = <Loader />;
     }
     else if (this.state.modal) {
-      content = (
+      modal = (
       <UpdateCard
         modal={this.state.modal}
         onClose={this.toggleModal}
+        card={this.state.card}
       />
       )
     }
@@ -59,7 +62,7 @@ class ViewCard extends Component {
           <div className="update-btn">
             <button
               className="btn btn-danger black waves-effect"
-              value={card}
+              value={JSON.stringify(card)}
               onClick={this.toggleModal}
             >
               Update
@@ -83,6 +86,7 @@ class ViewCard extends Component {
         </Link>
         <h1>Cards</h1>
         {content}
+        {modal}
       </div>
     );
   }
@@ -97,4 +101,4 @@ const mapStateToProps = (state) => ({
 });
 
 // export default connect(mapStateToProps, { getCards })(withRouter(ViewCard));
-export default connect(mapStateToProps, { getCards, deleteCard, updateCard })(ViewCard);
+export default connect(mapStateToProps, { getCards, deleteCard })(ViewCard);
