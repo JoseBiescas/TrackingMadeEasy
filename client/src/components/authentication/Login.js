@@ -1,11 +1,11 @@
-/*
-*/
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import { loginUser } from "../../actions/authActions";
 import classnames from "classnames";
+
+import "./Authentication.css";
 
 class Login extends Component {
   constructor() {
@@ -31,7 +31,7 @@ class Login extends Component {
 
     if (nextProps.errors) {
       this.setState({
-        errors: nextProps.errors
+        errors: nextProps.errors,
       });
     }
   }
@@ -47,77 +47,77 @@ class Login extends Component {
     };
     this.props.loginUser(userData);
   };
-  
+
   render() {
     const { errors } = this.state;
     //Same as const errors = this.state.errors;
     return (
-      <div className="login-container">
-        <div style={{ marginTop: "4rem" }} className="row">
-          <div className="col s8 offset-s2">
-            <Link to="/" className="btn-flat waves-effect">
-              <i className="material-icons left">keyboard_backspace</i> Back to
-              home
+      <div className="authentication-container">
+        <div className="form-content">
+          <div className="button-home-wrapper">
+            <Link to="/" className="button-home">
+              <b>Home</b>
             </Link>
-            <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-              <h4>
-                <b>Login</b> below
-              </h4>
-              <p className="grey-text text-darken-1">
-                Don't have an account? <Link to="/register">Register</Link>
-              </p>
-            </div>
-            <form noValidate onSubmit={this.onSubmit}>
-              <div className="input-field col s12">
-                <input
-                  onChange={this.onChange}
-                  value={this.state.email}
-                  error={errors.email}
-                  id="email"
-                  type="email"
-                  className={classnames("", {
-                    invalid: errors.email || errors.emailnotFound
-                  })}
-                />
-                <label style={{color: "black"}} htmlFor="email">Email</label>
-                <span className="red-text">
-                  {errors.email}
-                  {errors.emailnotFound}
-                </span>
-              </div>
-              <div className="input-field col s12">
-                <input
-                  onChange={this.onChange}
-                  value={this.state.password}
-                  error={errors.password}
-                  id="password"
-                  type="password"
-                  className={classnames("", {
-                    invalid: errors.password || errors.passwordincorrect
-                  })}
-                />
-                <label style={{color: "black"}} htmlFor="password">Password</label>
-                <span className="red-text">
-                  {errors.password}
-                  {errors.passwordincorrect}
-                </span>
-              </div>
-              <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-                <button
-                  style={{
-                    width: "150px",
-                    borderRadius: "3px",
-                    letterSpacing: "1.5px",
-                    marginTop: "1rem",
-                  }}
-                  type="submit"
-                  className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-                >
-                  Login
-                </button>
-              </div>
-            </form>
           </div>
+          <div className="content-information">
+            <h4>
+              <b>Login</b> below
+            </h4>
+            <p>
+              Don't have an account?{" "}
+              <Link to="/register" className="content-information-link">
+                Register
+              </Link>
+            </p>
+          </div>
+          <form noValidate onSubmit={this.onSubmit}>
+            <div className="input-field">
+              <label>
+                Email
+              </label>
+              <input
+                onChange={this.onChange}
+                value={this.state.email}
+                error={errors.email}
+                id="email"
+                type="email"
+                className={classnames("email", {
+                  invalid: errors.email || errors.emailnotFound,
+                })}
+              />
+              <span className="error-text">
+                {errors.email}
+                {errors.emailnotFound}
+              </span>
+            </div>
+            <div className="input-field">
+              <label>
+                Password
+              </label>
+              <input
+                onChange={this.onChange}
+                value={this.state.password}
+                error={errors.password}
+                id="password"
+                type="password"
+                className={classnames("password", {
+                  invalid: errors.password || errors.passwordincorrect,
+                })}
+              />
+              <span className="error-text">
+                {errors.password}
+                {errors.passwordincorrect}
+              </span>
+            </div>
+            <div className="submit-button">
+              <button
+                type="submit"
+                className="button"
+              >
+                Login
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     );
@@ -128,17 +128,14 @@ class Login extends Component {
 Login.propTypes = {
   loginUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired
+  errors: PropTypes.object.isRequired,
 };
 
 //Allows us to get our state from Redux and map it to props which we can use inside components
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   auth: state.auth,
-  errors: state.errors
+  errors: state.errors,
 });
 
 // connect() connects our React component to our Redux store.
-export default connect(
-  mapStateToProps,
-  { loginUser }
-)(Login);
+export default connect(mapStateToProps, { loginUser })(Login);
