@@ -25,35 +25,26 @@ class Dashboard extends Component {
     const { user } = this.props.auth;
 
     return (
-      <div className="dashboard-container valign-wrapper">
+      <div className="dashboard-container">
         <div className="row">
-          <div className="col s12 center-align">
-            <h4>
-              <b>Hey there,</b> {user.username.split(" ")[0]}
-              <p className="flow-text grey-text text-darken-1">
-                You are logged into a full-stack{" "}
-                <span style={{ fontFamily: "monospace" }}>MERN</span> app
-              </p>
-            </h4>
-            <button
-              onClick={this.onLogoutClick}
-              className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-            >
-              Logout
-            </button>
-            <button
-              onClick={this.onCreateClick}
-              className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-            >
-              CreateCard
-            </button>
-            <button
-              onClick={this.onViewClick}
-              className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-            >
-              ViewCards
-            </button>
-          </div>
+          <h1 className="title-text">
+            <b>Hey there,</b> {user.username.split(" ")[0]}
+            <p className="main-text">
+              You are logged into a full-stack{" "}
+              <span style={{ fontFamily: "monospace" }}>MERN</span> app
+            </p>
+          </h1>
+        </div>
+        <div className="row">
+          <button onClick={this.onLogoutClick} className="dashboard-button">
+            Logout
+          </button>
+          <button onClick={this.onCreateClick} className="dashboard-button">
+            CreateCard
+          </button>
+          <button onClick={this.onViewClick} className="dashboard-button">
+            ViewCards
+          </button>
         </div>
       </div>
     );
