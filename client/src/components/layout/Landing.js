@@ -9,7 +9,7 @@ class Landing extends Component {
         <div className="landing-row">
           <div className="landing-col">
               <div className="landing-title"> 
-                <b>Track</b> your project's progess
+                <b>Track</b> the things you need to do!
               </div>
             <br />
             <div className="landing-link-col">
