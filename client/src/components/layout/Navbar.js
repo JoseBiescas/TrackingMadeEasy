@@ -1,21 +1,19 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import "./Navbar.css";
 
 class Navbar extends Component {
+  //z-depth-0
   render() {
     return (
-      <div className="navbar-fixed">
-        <nav className="z-depth-0">
-          <div className="nav-wrapper black">
+      <div className="navbar">
+        <nav className="navbar-depth"> 
+          <div className="navbar-wrapper">
             <Link
               to="/"
-              style={{
-                fontFamily: "monospace",
-              }}
-              className="col s5 brand-logo center white-text"
+              className="navbar-logo"
             >
-              <i className="material-icons">code</i>
-              MERN
+              <b>TRACKING MADE EASY</b>
             </Link>
           </div>
         </nav>

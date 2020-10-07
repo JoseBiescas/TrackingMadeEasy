@@ -1,39 +1,27 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-
+import "./Landing.css";
+//col s12 center-align: landing-col
 class Landing extends Component {
   render() {
     return (
-      <div style={{ height: "75vh" }} className="landing-container valign-wrapper">
-        <div className="row">
-          <div className="col s12 center-align">
-            <h4>
-              <b>Tracking Made Easy</b>
-            </h4>
-            <b>Track</b> your project's progess
+      <div className="landing-container">
+        <div className="landing-row">
+          <div className="landing-col">
+              <div className="landing-title"> 
+                <b>Track</b> the things you need to do!
+              </div>
             <br />
-            <div className="col s6">
+            <div className="landing-link-col">
               <Link
                 to="/register"
-                style={{
-                  width: "140px",
-                  borderRadius: "3px",
-                  letterSpacing: "1.5px",
-                }}
-                className="btn btn-large waves-effect waves light hoverable blue accent-3"
+                className="landing-button"
               >
                 Register
               </Link>
-            </div>
-            <div className="col s6">
               <Link
                 to="/login"
-                style={{
-                  width: "140px",
-                  borderRadius: "3px",
-                  letterSpacing: "1.5px",
-                }}
-                className="btn btn-large waves-effect waves light hoverable blue accent-3"
+                className="landing-button"
               >
                 Log In
               </Link>

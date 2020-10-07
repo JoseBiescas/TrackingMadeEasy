@@ -63,60 +63,55 @@ class CreateCard extends Component {
     return (
       <div className="create-container">
         <div className="row">
-          <div className="col s8 offset-s2">
-            <Link to="/dashboard" className="btn-flat waves-effect">
-              <i className="material-icons left">keyboard_backspace</i>
-              Back to Dashboard
-            </Link>
-            <div className="col s12">
+          <div className="form-content">
+            <div className="button-home-wrapper">
+              <Link to="/dashboard" className="button-home">
+                Back
+              </Link>
+            </div>
+            <div className="create-content-information">
               <h4>
                 <b>Create</b> Card
               </h4>
             </div>
             <form noValidate onSubmit={this.onSubmit}>
-              <div className="input-field col s12">
+              <div className="input-field">
+                <label style={{ color: "black" }} htmlFor="email">
+                  Title
+                </label>
                 <input
                   onChange={this.onChange}
                   value={this.state.title}
                   type="text"
                   id="title"
                 />
-                <label style={{ color: "black" }} htmlFor="email">
-                  Title
-                </label>
               </div>
-              <div className="input-field col s12">
+              <div className="input-field">
+                <label style={{ color: "black" }} htmlFor="password">
+                  Description
+                </label>
                 <input
                   onChange={this.onChange}
                   value={this.state.description}
                   type="text"
                   id="description"
                 />
-                <label style={{ color: "black" }} htmlFor="password">
-                  Description
-                </label>
               </div>
-              <div className="input-field col s12">
+              <div className="input-field">
+                <label style={{ color: "black" }} htmlFor="password">
+                  Label
+                </label>
                 <input
                   onChange={this.onChange}
                   value={this.state.labels}
                   type="text"
                   id="labels"
                 />
-                <label style={{ color: "black" }} htmlFor="password">
-                  Label
-                </label>
               </div>
-              <div className="col s12" style={{ paddingLeft: "11.250px" }}>
+              <div className="submit-button">
                 <button
-                  style={{
-                    width: "150px",
-                    borderRadius: "3px",
-                    letterSpacing: "1.5px",
-                    marginTop: "1rem",
-                  }}
                   type="submit"
-                  className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+                  className="button"
                 >
                   Submit
                 </button>
@@ -140,4 +135,4 @@ const mapStateToProps = (state) => ({
   errors: state.errors,
 });
 
-export default connect(mapStateToProps, { createCard })( withRouter(CreateCard));
+export default connect(mapStateToProps, { createCard })(withRouter(CreateCard));

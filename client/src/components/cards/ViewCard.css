@@ -6,7 +6,7 @@
 
 .card {
     position: relative; /* All others will be absolutely positioned to card */
-    background-color: rgb(175, 253, 178);
+    background-color:  #b2dfdb;
     border-radius: 20px;
     width: auto;
     height: auto;
@@ -18,12 +18,11 @@
     text-align: center;
 }
 
-.card .delete-btn .btn {
+.card .delete-btn .button {
     position: absolute;
     width: auto;
     height: auto;
-    border-radius: 50%;
-    right: 0px;
+    right: 20px;
 }
 
 .card .title {

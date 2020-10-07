@@ -12,8 +12,8 @@ class ViewCard extends Component {
     super();
     this.state = {
       modal: false,
-      card: null
-    }
+      card: null,
+    };
   }
   componentDidMount() {
     if (!this.props.auth.isAuthenticated) {
@@ -29,39 +29,37 @@ class ViewCard extends Component {
 
   toggleModal = (e) => {
     e.preventDefault();
-    this.setState({modal: !this.state.modal, card: e.target.value})
-  }
+    this.setState({ modal: !this.state.modal, card: e.target.value });
+  };
 
   render() {
     let content;
     let modal;
     if (this.props.cardsLoading) {
-        content = <Loader />;
-    }
-    else if (this.state.modal) {
+      content = <Loader />;
+    } else if (this.state.modal) {
       modal = (
-      <UpdateCard
-        modal={this.state.modal}
-        onClose={this.toggleModal}
-        card={this.state.card}
-      />
-      )
-    }
-    else {
+        <UpdateCard
+          modal={this.state.modal}
+          onClose={this.toggleModal}
+          card={this.state.card}
+        />
+      );
+    } else {
       content = this.props.cards.map((card) => (
         <div className="card" key={card._id}>
           <div className="delete-btn">
             <button
-              className="btn btn-danger black waves-effect"
+              className="button"
               value={card._id}
               onClick={this.onDelete}
             >
               X
             </button>
           </div>
-          <div className="update-btn">
+          <div className="update-btn" style={{paddingLeft: "15px"}}>
             <button
-              className="btn btn-danger black waves-effect"
+              className="button"
               value={JSON.stringify(card)}
               onClick={this.toggleModal}
             >
@@ -77,13 +75,14 @@ class ViewCard extends Component {
         </div>
       ));
     }
-    
+
     return (
       <div className="card-container">
-        <Link to="/dashboard" className="btn-flat waves-effect">
-          <i className="material-icons left">keyboard_backspace</i>
-          Back to Dashboard
-        </Link>
+        <div className="button-home-wrapper" style={{paddingTop: "20px"}}>
+          <Link to="/dashboard" className="button-home">
+            Back to Dashboard
+          </Link>
+        </div>
         <h1>Cards</h1>
         {content}
         {modal}
@@ -97,7 +96,7 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
   errors: state.errors,
   cards: state.cards.cards, // name: state.cardReducerName in root.cardReducer
-  cardsLoading: state.cards.cardsLoading
+  cardsLoading: state.cards.cardsLoading,
 });
 
 // export default connect(mapStateToProps, { getCards })(withRouter(ViewCard));
