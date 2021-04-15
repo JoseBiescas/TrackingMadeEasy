@@ -3,14 +3,8 @@ import { Link as ReactLink } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { loginUser } from "../../actions/authActions";
-import classnames from "classnames";
 import {
   Flex,
-  Link,
-  Stack,
-  HStack,
-  Text,
-  VStack,
   Box,
   Heading,
   FormControl,
@@ -73,7 +67,7 @@ class Login extends Component {
         flexDirection="column"
       >
         <Box padding="20px" borderRadius="12px" bg="#b2dfdb">
-          <Box p={2}>
+          <Box>
             <Heading>
               <b>Login</b>
               <Button
@@ -82,10 +76,24 @@ class Login extends Component {
                 to="/"
                 float="right"
                 size="sm"
+                borderRadius="12px"
               >
                 Home
               </Button>
             </Heading>
+            <p>
+              Don't have an account?{" "}
+              <Button
+                as={ReactLink}
+                to="/register"
+                bg="#80cbc4"
+                borderRadius="12px"
+                color="black"
+                size="sm"
+              >
+                Register
+              </Button>
+            </p>
           </Box>
           <Box>
             <form onSubmit={this.onSubmit}>
