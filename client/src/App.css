@@ -7,3 +7,8 @@ body {
     background-position: center !important;
     background-size: cover !important;
 }
+
+html {
+    height: 100%;
+    width: 100%;
+}

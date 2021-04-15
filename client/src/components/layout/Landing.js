@@ -1,34 +1,48 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import "./Landing.css";
-//col s12 center-align: landing-col
+import { Flex, Link, Stack, HStack, Text, VStack, Box } from "@chakra-ui/react";
+import { Link as ReactLink } from "react-router-dom";
+// import "./Landing.css";
+
 class Landing extends Component {
   render() {
     return (
-      <div className="landing-container">
-        <div className="landing-row">
-          <div className="landing-col">
-              <div className="landing-title"> 
-                <b>Track</b> the things you need to do!
-              </div>
-            <br />
-            <div className="landing-link-col">
-              <Link
-                to="/register"
-                className="landing-button"
-              >
-                Register
-              </Link>
-              <Link
-                to="/login"
-                className="landing-button"
-              >
-                Log In
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
+      <VStack justify="center" align="center" height="75vh" spacing="5vh">
+        <Box
+          bg="#80cbc4"
+          paddingLeft="50px"
+          paddingRight="50px"
+          paddingTop="25px"
+          paddingBottom="25px"
+          borderRadius="20px"
+        >
+          <Text fontSize="4xl">
+            <b>Track</b> the things you need to do!
+          </Text>
+        </Box>
+        <br />
+        <Box>
+          <Link
+            as={ReactLink}
+            margin="15px"
+            borderRadius="12px"
+            padding="20px"
+            bg="#80cbc4"
+            to="/register"
+          >
+            Register
+          </Link>
+          <Link
+            as={ReactLink}
+            margin="15px"
+            borderRadius="12px"
+            padding="20px"
+            bg="#80cbc4"
+            to="/login"
+          >
+            Log In
+          </Link>
+        </Box>
+      </VStack>
     );
   }
 }
