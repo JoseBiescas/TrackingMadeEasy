@@ -2,9 +2,20 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { createCard } from "../../actions/cardAction";
-import { Link, withRouter } from "react-router-dom";
+import { Link as ReactLink, withRouter } from "react-router-dom";
+import {
+  Flex,
+  Box,
+  Heading,
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+  Input,
+  Button,
+  Textarea
+} from "@chakra-ui/react";
 
-import "./CreateCard.css";
+// import "./CreateCard.css";
 
 class CreateCard extends Component {
   constructor() {
@@ -61,65 +72,77 @@ class CreateCard extends Component {
     // const { user } = this.props.auth;
     // const { errors } = this.state;
     return (
-      <div className="create-container">
-        <div className="row">
-          <div className="form-content">
-            <div className="button-home-wrapper">
-              <Link to="/dashboard" className="button-home">
+      <Flex
+        justify="center"
+        align="center"
+        height="75vh"
+        flexDirection="column"
+      >
+        <Box padding="20px" borderRadius="12px" bg="#b2dfdb">
+          <Box>
+            <Heading>
+              <b>Create Card</b>
+              <Button
+                bg="#80cbc4"
+                as={ReactLink}
+                to="/dashboard"
+                float="right"
+                size="sm"
+                marginLeft="15px"
+                borderRadius="12px"
+              >
                 Back
-              </Link>
-            </div>
-            <div className="create-content-information">
-              <h4>
-                <b>Create</b> Card
-              </h4>
-            </div>
+              </Button>
+            </Heading>
+          </Box>
+          <Box>
             <form noValidate onSubmit={this.onSubmit}>
-              <div className="input-field">
-                <label style={{ color: "black" }} htmlFor="email">
-                  Title
-                </label>
-                <input
+              <FormControl>
+                <FormLabel><b>Title</b></FormLabel>
+                <Input
+                  variant="flushed"
+                  focusBorderColor="#80cbc4"
                   onChange={this.onChange}
                   value={this.state.title}
                   type="text"
                   id="title"
                 />
-              </div>
-              <div className="input-field">
-                <label style={{ color: "black" }} htmlFor="password">
-                  Description
-                </label>
-                <input
+              </FormControl>
+              <FormControl>
+                <FormLabel><b>Description</b></FormLabel>
+                <Textarea
+                  variant="outline"
+                  focusBorderColor="#80cbc4"
                   onChange={this.onChange}
                   value={this.state.description}
                   type="text"
                   id="description"
                 />
-              </div>
-              <div className="input-field">
-                <label style={{ color: "black" }} htmlFor="password">
-                  Label
-                </label>
-                <input
+              </FormControl>
+              <FormControl>
+                <FormLabel><b>Labels</b></FormLabel>
+                <Input
+                  variant="flushed"
+                  focusBorderColor="#80cbc4"
                   onChange={this.onChange}
                   value={this.state.labels}
                   type="text"
                   id="labels"
                 />
-              </div>
-              <div className="submit-button">
-                <button
-                  type="submit"
-                  className="button"
-                >
-                  Submit
-                </button>
-              </div>
+              </FormControl>
+              <Button
+                marginTop="20px"
+                bg="#80cbc4"
+                type="submit"
+                borderRadius="12px"
+                color="black"
+              >
+                Create
+              </Button>
             </form>
-          </div>
-        </div>
-      </div>
+          </Box>
+        </Box>
+      </Flex>
     );
   }
 }

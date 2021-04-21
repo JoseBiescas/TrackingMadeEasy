@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getCards, deleteCard } from "../../actions/cardAction";
-import { Link } from "react-router-dom";
+import { Link as ReactLink } from "react-router-dom";
 import UpdateCard from "./UpdateCard";
 
 import "./ViewCard.css";
 import Loader from "../loader/Loader";
+
+import { Flex, Box, Heading, Button, Text, HStack } from "@chakra-ui/react";
 
 class ViewCard extends Component {
   constructor() {
@@ -47,46 +49,69 @@ class ViewCard extends Component {
       );
     } else {
       content = this.props.cards.map((card) => (
-        <div className="card" key={card._id}>
-          <div className="delete-btn">
-            <button
-              className="button"
-              value={card._id}
-              onClick={this.onDelete}
-            >
-              X
-            </button>
-          </div>
-          <div className="update-btn" style={{paddingLeft: "15px"}}>
-            <button
-              className="button"
+        <Box
+          key={card._id}
+          bg="#b2dfdb"
+          borderRadius="20px"
+          padding="20px"
+          marginBottom="7vh"
+          width="400px"
+        >
+          <Box d="flex" justifyContent="space-between">
+            <Button
               value={JSON.stringify(card)}
               onClick={this.toggleModal}
+              bg="#80cbc4"
+              borderRadius="12px"
+              color="black"
+              size="sm"
             >
-              Update
-            </button>
-          </div>
-          <div className="title">
-            <h3>{card.title}</h3>
-          </div>
-          <div className="description">
-            <p>{card.description}</p>
-          </div>
-        </div>
+              Open
+            </Button>
+            <Button
+              value={card._id}
+              onClick={this.onDelete}
+              bg="#80cbc4"
+              borderRadius="12px"
+              color="black"
+              size="sm"
+            >
+              X
+            </Button>
+          </Box>
+          <Box>
+            <Heading size="md">{card.title}</Heading>
+          </Box>
+        </Box>
       ));
     }
 
     return (
-      <div className="card-container">
-        <div className="button-home-wrapper" style={{paddingTop: "20px"}}>
-          <Link to="/dashboard" className="button-home">
+      <Box>
+        <Box>
+          <Button
+            as={ReactLink}
+            to="/dashboard"
+            marginLeft="5vw"
+            marginTop="5vh"
+            bg="#80cbc4"
+            borderRadius="12px"
+            color="black"
+          >
             Back to Dashboard
-          </Link>
-        </div>
-        <h1>Cards</h1>
-        {content}
-        {modal}
-      </div>
+          </Button>
+        </Box>
+        <Heading paddingLeft="5vw">Cards</Heading>
+        <HStack
+          d="flex"
+          paddingLeft="15vw"
+          paddingRight="15vw"
+          flexWrap="wrap"
+        >
+          {content}
+          {modal}
+        </HStack>
+      </Box>
     );
   }
 }

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Flex, Link, Stack, HStack, Text, VStack, Box } from "@chakra-ui/react";
+import { Link, Text, VStack, Box } from "@chakra-ui/react";
 import { Link as ReactLink } from "react-router-dom";
 // import "./Landing.css";
 
