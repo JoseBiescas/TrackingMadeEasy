@@ -2,8 +2,13 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
-
-import "./Dashboard.css";
+import { Link as ReactLink } from "react-router-dom"
+import {
+  VStack,
+  Box,
+  Text,
+  Button
+} from "@chakra-ui/react";
 
 class Dashboard extends Component {
   onLogoutClick = (e) => {
@@ -25,28 +30,52 @@ class Dashboard extends Component {
     const { user } = this.props.auth;
 
     return (
-      <div className="dashboard-container">
-        <div className="row">
-          <h1 className="title-text">
-            <b>Hey there,</b> {user.username.split(" ")[0]}
-            <p className="main-text">
-              You are logged into a full-stack{" "}
-              <span style={{ fontFamily: "monospace" }}>MERN</span> app
-            </p>
-          </h1>
-        </div>
-        <div className="row">
-          <button onClick={this.onLogoutClick} className="dashboard-button">
+      <VStack justify="center" align="center" height="75vh" spacing="5vh">
+        <Box
+          bg="#80cbc4"
+          paddingLeft="50px"
+          paddingRight="50px"
+          paddingTop="25px"
+          paddingBottom="25px"
+          borderRadius="20px"
+        >
+          <Text fontSize="4xl">
+          <b>Hey there,</b> {user.username.split(" ")[0]}
+          </Text>
+        </Box>
+        <br />
+        <Box>
+          <Button
+            as={ReactLink}
+            margin="15px"
+            borderRadius="12px"
+            padding="20px"
+            bg="#80cbc4"
+            to="/create"
+          >
+            Create Card
+          </Button>
+          <Button
+            as={ReactLink}
+            margin="15px"
+            borderRadius="12px"
+            padding="20px"
+            bg="#80cbc4"
+            to="/view"
+          >
+            View Cards
+          </Button>
+          <Button
+            onClick={this.onLogoutClick}
+            margin="15px"
+            borderRadius="12px"
+            padding="20px"
+            bg="#80cbc4"
+          >
             Logout
-          </button>
-          <button onClick={this.onCreateClick} className="dashboard-button">
-            CreateCard
-          </button>
-          <button onClick={this.onViewClick} className="dashboard-button">
-            ViewCards
-          </button>
-        </div>
-      </div>
+          </Button>
+        </Box>
+      </VStack>
     );
   }
 }

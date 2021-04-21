@@ -1,3 +1,14 @@
 body {
-    background-image: url("./images/forest.jpg");
+    background-image: url("./images/forest.jpg") !important; 
+
+    height: 100%;
+    width: 100%;
+
+    background-position: center !important;
+    background-size: cover !important;
+}
+
+html {
+    height: 100%;
+    width: 100%;
 }

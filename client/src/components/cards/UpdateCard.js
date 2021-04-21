@@ -1,8 +1,22 @@
 import React, { Component } from "react";
-import Modal from "react-modal";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { updateCard } from "../../actions/cardAction";
+import {
+  Button,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  FormControl,
+  FormLabel,
+  Input,
+  Textarea,
+  Spacer
+} from "@chakra-ui/react";
 
 class UpdateCard extends Component {
   constructor() {
@@ -38,59 +52,77 @@ class UpdateCard extends Component {
   onSubmit = (e) => {
     let curr_card = JSON.parse(this.props.card);
     this.props.updateCard(this.state, curr_card._id);
+    this.props.onClose(e);
   };
 
   render() {
     return (
-      <div className="modal-popup">
-        <Modal isOpen={this.props.modal} ariaHideApp={false}>
-          <h2>Update Your Card!</h2>
-          <div className="container-modal">
-            <button className="close-modal" onClick={this.onClose}>
-              Exit
-            </button>
-            <form noValidate onSubmit={this.onSubmit}>
-              <div className="title-modal">
-                <label>Title</label>
-                <input
-                  id="title"
-                  type="text"
-                  onChange={this.onChange}
-                  value={this.state.title}
-                />
-              </div>
-              <div className="description-modal">
-                <label>Description</label>
-                <br ></br>
-                <br ></br>
-                <input
-                  id="description"
-                  type="textarea"
-                  value={this.state.description}
-                  onChange={this.onChange}
-                />
-              </div>
-              <div className="labels-modal">
-                <label>Label</label>
-                <input
-                  id="labels"
-                  type="text"
-                  value={this.state.labels}
-                  onChange={this.onChange}
-                />
-              </div>
-              <div className="button-modal">
-                <button
-                  type="submit"
-                  className="btn waves-effect waves-light hoverable blue accent-3"
-                >
-                  Update
-                </button>
-              </div>
-            </form>
-          </div>
-        </Modal>
-      </div>
+      <Modal isOpen={this.props.modal}>
+        <ModalOverlay />
+        <ModalContent bg="#b2dfdb">
+          <ModalHeader>Update Your Card!</ModalHeader>
+          <ModalCloseButton onClick={this.onClose} />
+          <ModalBody>
+            <FormControl id="title">
+              <FormLabel>
+                <b>Title</b>
+              </FormLabel>
+              <Input
+                id="title"
+                type="text"
+                onChange={this.onChange}
+                value={this.state.title}
+                variant="flushed"
+                focusBorderColor="#80cbc4"
+              />
+            </FormControl>
+            <FormControl id="description">
+              <FormLabel>
+                <b>Description</b>
+              </FormLabel>
+              <Textarea
+                id="description"
+                type="text"
+                onChange={this.onChange}
+                value={this.state.description}
+                focusBorderColor="#80cbc4"
+              />
+            </FormControl>
+            <FormControl id="labels">
+              <FormLabel>
+                <b>Labels</b>
+              </FormLabel>
+              <Input
+                id="labels"
+                type="text"
+                onChange={this.onChange}
+                value={this.state.labels}
+                variant="flushed"
+                focusBorderColor="#80cbc4"
+              />
+            </FormControl>
+          </ModalBody>
+          <ModalFooter>
+            <Button
+              bg="#80cbc4"
+              borderRadius="12px"
+              color="black"
+              onClick={this.onSubmit}
+            >
+              Save
+            </Button>
+            <Spacer />
+            <Button
+              bg="#80cbc4"
+              borderRadius="12px"
+              color="black"
+              onClick={this.onClose}
+            >
+              Cancel
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     );
   }
 }

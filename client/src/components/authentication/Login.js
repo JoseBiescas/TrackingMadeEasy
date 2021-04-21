@@ -1,11 +1,20 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link as ReactLink } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { loginUser } from "../../actions/authActions";
-import classnames from "classnames";
+import {
+  Flex,
+  Box,
+  Heading,
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+  Input,
+  Button,
+} from "@chakra-ui/react";
 
-import "./Authentication.css";
+// import "./Authentication.css";
 
 class Login extends Component {
   constructor() {
@@ -50,76 +59,87 @@ class Login extends Component {
 
   render() {
     const { errors } = this.state;
-    //Same as const errors = this.state.errors;
     return (
-      <div className="authentication-container">
-        <div className="form-content">
-          <div className="button-home-wrapper">
-            <Link to="/" className="button-home">
-              <b>Home</b>
-            </Link>
-          </div>
-          <div className="content-information">
-            <h4>
-              <b>Login</b> below
-            </h4>
+      <Flex
+        justify="center"
+        align="center"
+        height="60vh"
+        flexDirection="column"
+      >
+        <Box padding="20px" borderRadius="12px" bg="#b2dfdb">
+          <Box>
+            <Heading>
+              <b>Login</b>
+              <Button
+                bg="#80cbc4"
+                as={ReactLink}
+                to="/"
+                float="right"
+                size="sm"
+                borderRadius="12px"
+              >
+                Home
+              </Button>
+            </Heading>
             <p>
               Don't have an account?{" "}
-              <Link to="/register" className="content-information-link">
-                Register
-              </Link>
-            </p>
-          </div>
-          <form noValidate onSubmit={this.onSubmit}>
-            <div className="input-field">
-              <label>
-                Email
-              </label>
-              <input
-                onChange={this.onChange}
-                value={this.state.email}
-                error={errors.email}
-                id="email"
-                type="email"
-                className={classnames("email", {
-                  invalid: errors.email || errors.emailnotFound,
-                })}
-              />
-              <span className="error-text">
-                {errors.email}
-                {errors.emailnotFound}
-              </span>
-            </div>
-            <div className="input-field">
-              <label>
-                Password
-              </label>
-              <input
-                onChange={this.onChange}
-                value={this.state.password}
-                error={errors.password}
-                id="password"
-                type="password"
-                className={classnames("password", {
-                  invalid: errors.password || errors.passwordincorrect,
-                })}
-              />
-              <span className="error-text">
-                {errors.password}
-                {errors.passwordincorrect}
-              </span>
-            </div>
-            <div className="submit-button">
-              <button
-                type="submit"
-                className="button"
+              <Button
+                as={ReactLink}
+                to="/register"
+                bg="#80cbc4"
+                borderRadius="12px"
+                color="black"
+                size="sm"
               >
-                Login
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
+                Register
+              </Button>
+            </p>
+          </Box>
+          <Box>
+            <form onSubmit={this.onSubmit}>
+              <FormControl isInvalid={errors.email || errors.emailnotFound}>
+                <FormLabel>E-mail</FormLabel>
+                <FormErrorMessage>
+                  {errors.email || errors.emailnotFound}
+                </FormErrorMessage>
+                <Input
+                  variant="flushed"
+                  focusBorderColor="#80cbc4"
+                  id="email"
+                  onChange={this.onChange}
+                  value={this.state.email}
+                  type="text"
+                />
+              </FormControl>
+              <FormControl
+                isInvalid={errors.password || errors.passwordincorrect} marginTop="10px"
+              >
+                <FormLabel>Password</FormLabel>
+                <FormErrorMessage>
+                  {errors.password || errors.passwordincorrect}
+                </FormErrorMessage>
+                <Input
+                  focusBorderColor="#80cbc4"
+                  variant="flushed"
+                  id="password"
+                  onChange={this.onChange}
+                  value={this.state.password}
+                  type="password"
+                />
+              </FormControl>
+              <Button
+                marginTop="20px"
+                bg="#80cbc4"
+                type="submit"
+                borderRadius="12px"
+                color="black"
+              >
+                Log-In
+              </Button>
+            </form>
+          </Box>
+        </Box>
+      </Flex>
     );
   }
 }
