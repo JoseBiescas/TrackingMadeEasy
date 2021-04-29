@@ -16,8 +16,8 @@ const CardSchema = new Schema(
             type: String,
             required: false
         },
-        labels: {
-            type: [String],
+        label: {
+            type: String,
             required: false
         }
     },

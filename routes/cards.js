@@ -32,7 +32,7 @@ router.post("/create", passport.authenticate("jwt", { session: false }), (req, r
       user: req.body.user,
       title: req.body.title,
       description: req.body.description,
-      labels: req.body.labels,
+      label: req.body.label,
     });
 
     newCard
@@ -70,8 +70,8 @@ router.patch("/update-card/:id", passport.authenticate("jwt", { session: false }
   if (req.body.description != null) {
     updateFields.description = req.body.description;
   }
-  if (req.body.labels != null) {
-    updateFields.labels = req.body.labels;
+  if (req.body.label != null) {
+    updateFields.label = req.body.label;
   }
   Card.findByIdAndUpdate(
     { _id: req.params.id },

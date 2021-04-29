@@ -41,6 +41,7 @@ router.post("/register", (req, res) => {
         username: req.body.username,
         email: req.body.email,
         password: req.body.password,
+        labels: ['Unlisted'],
       });
 
       //hash password using bcrypt
@@ -51,7 +52,7 @@ router.post("/register", (req, res) => {
           newUser
             .save()
             .then((user) => res.json(user))
-            .catch((err) => console.log(err));
+            .catch((err) => res.status(500).json(err));
         });
       });
     }
@@ -85,7 +86,8 @@ router.post("/login", (req, res) => {
         const payload = {
           id: user.id,
           username: user.username,
-          email: user.email
+          email: user.email,
+          labels: user.labels
         };
 
         //Sign our jwt, and include our payload, secret key and an expiresIn param.

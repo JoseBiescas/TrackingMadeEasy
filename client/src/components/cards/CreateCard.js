@@ -12,7 +12,8 @@ import {
   FormLabel,
   Input,
   Button,
-  Textarea
+  Textarea,
+  Select,
 } from "@chakra-ui/react";
 
 // import "./CreateCard.css";
@@ -28,7 +29,7 @@ class CreateCard extends Component {
     this.state = {
       title: "",
       description: "",
-      labels: "",
+      label: "",
       errors: {},
     };
   }
@@ -62,7 +63,7 @@ class CreateCard extends Component {
       user: this.props.auth.user.id,
       title: this.state.title,
       description: this.state.description,
-      labels: this.state.labels,
+      label: this.state.label,
     };
 
     this.props.createCard(cardData, this.props.history);
@@ -98,7 +99,9 @@ class CreateCard extends Component {
           <Box>
             <form noValidate onSubmit={this.onSubmit}>
               <FormControl>
-                <FormLabel><b>Title</b></FormLabel>
+                <FormLabel>
+                  <b>Title</b>
+                </FormLabel>
                 <Input
                   variant="flushed"
                   focusBorderColor="#80cbc4"
@@ -109,7 +112,9 @@ class CreateCard extends Component {
                 />
               </FormControl>
               <FormControl>
-                <FormLabel><b>Description</b></FormLabel>
+                <FormLabel>
+                  <b>Description</b>
+                </FormLabel>
                 <Textarea
                   variant="outline"
                   focusBorderColor="#80cbc4"
@@ -120,15 +125,21 @@ class CreateCard extends Component {
                 />
               </FormControl>
               <FormControl>
-                <FormLabel><b>Labels</b></FormLabel>
-                <Input
+                <FormLabel>
+                  <b>Labels</b>
+                </FormLabel>
+                <Select
                   variant="flushed"
                   focusBorderColor="#80cbc4"
                   onChange={this.onChange}
-                  value={this.state.labels}
+                  value={this.state.label}
                   type="text"
-                  id="labels"
-                />
+                  id="label"
+                >
+                  {this.props.auth.user.labels.map((label) => (
+                    <option key={label}>{label}</option>
+                  ))}
+                </Select>
               </FormControl>
               <Button
                 marginTop="20px"
