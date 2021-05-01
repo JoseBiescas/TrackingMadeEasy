@@ -3,6 +3,7 @@ export const GET_ERRORS = "GET_ERRORS";
 //User types
 export const USER_LOADING = "USER_LOADING";
 export const SET_CURRENT_USER = "SET_CURRENT_USER";
+export const CREATE_LABEL = "CREATE_LABEL";
 
 //Card types
 export const CREATE_CARD = "CREATE_CARD";

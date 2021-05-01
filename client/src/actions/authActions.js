@@ -11,7 +11,7 @@ import axios from "axios";
 import setAuthToken from "../utils/setAuthToken";
 import jwt_decode from "jwt-decode";
 
-import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING } from "./types";
+import { CREATE_LABEL, GET_ERRORS, SET_CURRENT_USER, USER_LOADING } from "./types";
 
 //Register
 export const registerUser = (userData, history) => dispatch => {
@@ -43,6 +43,21 @@ export const loginUser = userData => dispatch => {
             payload: err.response.data
         }));
 };
+
+//Create Label
+export const createLabel = (data) => (dispatch) => {
+    let res;
+    const { user_id } = data;
+    delete data.user_id;
+    res = axios.patch(`api/users/create_label/${user_id}`, data)
+    .then((res) => {
+        dispatch({
+            type: CREATE_LABEL,
+            payload: data.label
+        })
+    });
+    return res;
+}
 
 //Set logged in user
 export const setCurrentUser = decoded => {

@@ -14,7 +14,9 @@ import {
   Button,
   Textarea,
   Select,
+  Spacer,
 } from "@chakra-ui/react";
+import CreateLabel from "../label/CreateLabel";
 
 // import "./CreateCard.css";
 
@@ -30,6 +32,7 @@ class CreateCard extends Component {
       title: "",
       description: "",
       label: "",
+      addLabel: false,
       errors: {},
     };
   }
@@ -53,6 +56,10 @@ class CreateCard extends Component {
     }
   }
 
+  toggleModal = () => {
+    this.setState({ addLabel: !this.state.addLabel });
+  };
+
   onChange = (e) => {
     this.setState({ [e.target.id]: e.target.value });
   };
@@ -72,14 +79,20 @@ class CreateCard extends Component {
   render() {
     // const { user } = this.props.auth;
     // const { errors } = this.state;
+    let modalLabel;
+    if (this.state.addLabel) {
+      modalLabel = (
+        <CreateLabel
+          addLabel={this.state.addLabel}
+          onClose={this.toggleModal}
+          userId={this.props.auth.user.id}
+        />
+      )
+    }
     return (
-      <Flex
-        justify="center"
-        align="center"
-        height="75vh"
-        flexDirection="column"
-      >
-        <Box padding="20px" borderRadius="12px" bg="#b2dfdb">
+      <Flex justify="center" align="center" height="75vh">
+        {modalLabel}
+        <Box padding="20px" borderRadius="12px" bg="#b2dfdb" maxW="305.083px">
           <Box>
             <Heading>
               <b>Create Card</b>
@@ -96,7 +109,7 @@ class CreateCard extends Component {
               </Button>
             </Heading>
           </Box>
-          <Box>
+          <Flex>
             <form noValidate onSubmit={this.onSubmit}>
               <FormControl>
                 <FormLabel>
@@ -126,10 +139,12 @@ class CreateCard extends Component {
               </FormControl>
               <FormControl>
                 <FormLabel>
-                  <b>Labels</b>
+                  <b>Label</b>
                 </FormLabel>
                 <Select
-                  variant="flushed"
+                  variant="filled"
+                  size="sm"
+                  bg="#80cbc4"
                   focusBorderColor="#80cbc4"
                   onChange={this.onChange}
                   value={this.state.label}
@@ -141,17 +156,29 @@ class CreateCard extends Component {
                   ))}
                 </Select>
               </FormControl>
-              <Button
-                marginTop="20px"
-                bg="#80cbc4"
-                type="submit"
-                borderRadius="12px"
-                color="black"
-              >
-                Create
-              </Button>
+              <Flex flexDir="row">
+                <Button
+                  marginTop="20px"
+                  bg="#80cbc4"
+                  type="submit"
+                  borderRadius="12px"
+                  color="black"
+                >
+                  Create Card
+                </Button>
+                <Spacer />
+                <Button
+                  marginTop="20px"
+                  bg="#80cbc4"
+                  borderRadius="12px"
+                  color="black"
+                  onClick={this.toggleModal}
+                >
+                  Create Label
+                </Button>
+              </Flex>
             </form>
-          </Box>
+          </Flex>
         </Box>
       </Flex>
     );

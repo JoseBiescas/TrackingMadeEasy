@@ -13,7 +13,7 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const passport = require("passport");
-require('dotenv').config();
+require("dotenv").config();
 
 //Load input validation
 const ValidateRegisterInput = require("../validate/register");
@@ -22,26 +22,45 @@ const ValidateLoginInput = require("../validate/login");
 //load user model
 const User = require("../models/User");
 
+//Create Label route
+router.patch(
+  "/create_label/:user_id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    User.findByIdAndUpdate(
+      { _id: req.params.user_id },
+      { $push: { labels: req.body.label } }
+    )
+      .then((response) => {
+        res.json("Success");
+      })
+      .catch((err) => res.status(400).json("Error: " + err));
+  }
+);
+
 //Register route
 router.post("/register", (req, res) => {
   // pull in errors and isValid from our Register validator.
   const { errors, isValid } = ValidateRegisterInput(req.body);
 
   //Check validation
-  if (!isValid) { //If isValid is false, we have errors, so return HTTP 400 and display errors.
+  if (!isValid) {
+    //If isValid is false, we have errors, so return HTTP 400 and display errors.
     return res.status(400).json(errors);
   }
 
   //Check if user already exists.
   User.findOne({ email: req.body.email }).then((user) => {
-    if (user) { //If they do, send HTTP 400 and display error.
+    if (user) {
+      //If they do, send HTTP 400 and display error.
       return res.status(400).json({ email: "Email already exists" });
-    } else { //Else, create new user using req.body properties.
+    } else {
+      //Else, create new user using req.body properties.
       const newUser = new User({
         username: req.body.username,
         email: req.body.email,
         password: req.body.password,
-        labels: ['Unlisted'],
+        labels: ["Unlisted"],
       });
 
       //hash password using bcrypt
@@ -65,7 +84,8 @@ router.post("/login", (req, res) => {
   const { errors, isValid } = ValidateLoginInput(req.body);
 
   //Check validation
-  if (!isValid) { //If isValid is false, we have errors, so send HTTP 400 and display errors.
+  if (!isValid) {
+    //If isValid is false, we have errors, so send HTTP 400 and display errors.
     return res.status(400).json(errors);
   }
 
@@ -74,7 +94,8 @@ router.post("/login", (req, res) => {
 
   //Check if user exists.
   User.findOne({ email }).then((user) => {
-    if (!user) { //If user doesn't exist, send HTTP 404 and display error.
+    if (!user) {
+      //If user doesn't exist, send HTTP 404 and display error.
       return res.status(404).json({ emailnotFound: "Email not found" });
     }
 
@@ -87,7 +108,7 @@ router.post("/login", (req, res) => {
           id: user.id,
           username: user.username,
           email: user.email,
-          labels: user.labels
+          labels: user.labels,
         };
 
         //Sign our jwt, and include our payload, secret key and an expiresIn param.
@@ -105,7 +126,8 @@ router.post("/login", (req, res) => {
             });
           }
         );
-      } else { //If match fails, return password incorrect error.
+      } else {
+        //If match fails, return password incorrect error.
         return res
           .status(400)
           .json({ passwordincorrect: "Password incorrect" });
