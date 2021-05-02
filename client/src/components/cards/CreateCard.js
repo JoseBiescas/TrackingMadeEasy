@@ -16,7 +16,7 @@ import {
   Select,
   Spacer,
 } from "@chakra-ui/react";
-import CreateLabel from "../label/CreateLabel";
+import EditLabel from "../label/EditLabel";
 
 // import "./CreateCard.css";
 
@@ -32,7 +32,7 @@ class CreateCard extends Component {
       title: "",
       description: "",
       label: "",
-      addLabel: false,
+      editLabel: false,
       errors: {},
     };
   }
@@ -57,7 +57,7 @@ class CreateCard extends Component {
   }
 
   toggleModal = () => {
-    this.setState({ addLabel: !this.state.addLabel });
+    this.setState({ editLabel: !this.state.editLabel });
   };
 
   onChange = (e) => {
@@ -80,12 +80,13 @@ class CreateCard extends Component {
     // const { user } = this.props.auth;
     // const { errors } = this.state;
     let modalLabel;
-    if (this.state.addLabel) {
+    if (this.state.editLabel) {
       modalLabel = (
-        <CreateLabel
-          addLabel={this.state.addLabel}
+        <EditLabel
+          editLabel={this.state.editLabel}
           onClose={this.toggleModal}
           userId={this.props.auth.user.id}
+          labels={this.props.auth.user.labels}
         />
       )
     }

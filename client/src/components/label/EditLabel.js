@@ -11,30 +11,71 @@ import {
   FormControl,
   FormLabel,
   Input,
+  Flex,
+  Checkbox,
+  Spacer,
+  list,
 } from "@chakra-ui/react";
 
 import { createLabel } from "../../actions/authActions";
 import { useSelector, useDispatch } from "react-redux";
 
-const CreateLabel = (props) => {
-  const { addLabel, onClose, userId } = props;
+const EditLabel = (props) => {
+  //Props
+  const { editLabel, onClose, userId, labels } = props;
+
+  //State
   const [label, setLabel] = useState("");
 
-  const state = useSelector(state => state.auth);
+  //Redux
+  const state = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
+  const listToDelete = [];
+
+  //Submit
   const onSubmit = (data, onClose) => {
     let res;
     res = dispatch(createLabel(data));
     onClose();
   };
 
+  const onDelete = (listToDelete) => {
+
+  }
+
+  const toDelete = (label) => {
+    if (listToDelete.includes(label)) {
+      const index = listToDelete.indexOf(label)
+      if (index > -1) {
+        listToDelete.splice(index, 1)
+      }
+    } else {
+      listToDelete.push(label);
+    }
+  }
+
   return (
-    <Modal isOpen={addLabel} onClose={onClose}>
+    <Modal isOpen={editLabel} onClose={onClose}>
       <ModalOverlay />
       <ModalContent bg="#b2dfdb">
-        <ModalHeader>Add a new Label</ModalHeader>
+        <ModalHeader>Edit Labels</ModalHeader>
         <ModalCloseButton />
+        <ModalBody>
+          <Flex flexDir="column">
+            {labels.map((label) => (
+              <Checkbox onChange={() => toDelete(label)} colorScheme="red">
+                {label}
+              </Checkbox>
+            ))}
+          </Flex>
+          <br />
+        </ModalBody>
+        <ModalFooter>
+          <Button bg="#80cbc4" borderRadius="12px" color="black" onClick={() => onDelete(listToDelete)}>
+            Delete
+          </Button>
+        </ModalFooter>
         <ModalBody>
           <FormControl id="title">
             <FormLabel>
@@ -55,9 +96,7 @@ const CreateLabel = (props) => {
             bg="#80cbc4"
             borderRadius="12px"
             color="black"
-            onClick={() =>
-              onSubmit({ label: label, user_id: userId }, onClose)
-            }
+            onClick={() => onSubmit({ label: label, user_id: userId }, onClose)}
           >
             Save
           </Button>
@@ -67,4 +106,4 @@ const CreateLabel = (props) => {
   );
 };
 
-export default CreateLabel;
+export default EditLabel;
