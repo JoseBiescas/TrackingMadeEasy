@@ -11,7 +11,7 @@ import axios from "axios";
 import setAuthToken from "../utils/setAuthToken";
 import jwt_decode from "jwt-decode";
 
-import { CREATE_LABEL, GET_ERRORS, SET_CURRENT_USER, USER_LOADING } from "./types";
+import { CLEAR_CARD, CREATE_LABEL, GET_ERRORS, SET_CURRENT_USER, USER_LOADING } from "./types";
 
 //Register
 export const registerUser = (userData, history) => dispatch => {
@@ -30,7 +30,7 @@ export const loginUser = userData => dispatch => {
         .post("api/users/login", userData)
         .then(res => {
             const { token } = res.data;
-            localStorage.setItem("jwtToken", token);
+            sessionStorage.setItem("jwtToken", token);
 
             setAuthToken(token);
 
@@ -76,7 +76,8 @@ export const setUserLoading = () => {
 
 //Log user out
 export const logoutUser = () => dispatch => {
-    localStorage.removeItem("jwtToken");
+    sessionStorage.removeItem("jwtToken");
     setAuthToken(false);
     dispatch(setCurrentUser({}));
+    dispatch({type: CLEAR_CARD});
 };

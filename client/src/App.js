@@ -21,9 +21,9 @@ import Dashboard from "./components/dashboard/Dashboard";
 import PrivateRoute from "./components/private-route/PrivateRoute";
 
 // Check for token to keep user logged in
-if (localStorage.jwtToken) {
+if (sessionStorage.jwtToken) {
   //set auth token header auth
-  const token = localStorage.jwtToken;
+  const token = sessionStorage.jwtToken;
   setAuthToken(token);
   //De code token and get user info and exp
   const decoded = jwt_decode(token);

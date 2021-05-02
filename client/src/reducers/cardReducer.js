@@ -3,7 +3,8 @@ import {
     DELETE_CARD,
     UPDATE_CARD,
     CARDS_LOADING,
-    GET_CARDS
+    GET_CARDS,
+    CLEAR_CARD
 } from "../actions/types";
 
 const initialState ={
@@ -42,6 +43,11 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 cards: [action.payload, ...state.cards]
+            };
+        case CLEAR_CARD:
+            return {
+                cards: initialState.cards,
+                cardsLoading: initialState.cardsLoading,
             };
         default:
             return state;
