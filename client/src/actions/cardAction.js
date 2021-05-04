@@ -17,7 +17,7 @@ import {
   UPDATE_CARD,
 } from "./types";
 
-//Create Task
+//Create Card
 export const createCard = (cardData, history) => (dispatch) => {
   axios
     .post("/api/cards/create", cardData)

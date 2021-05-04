@@ -15,7 +15,8 @@ import {
   FormLabel,
   Input,
   Textarea,
-  Spacer
+  Spacer,
+  Select,
 } from "@chakra-ui/react";
 
 class UpdateCard extends Component {
@@ -28,7 +29,7 @@ class UpdateCard extends Component {
     this.state = {
       title: "",
       description: "",
-      labels: "",
+      label: "",
     };
   }
 
@@ -37,7 +38,7 @@ class UpdateCard extends Component {
     this.setState({
       title: curr_card.title,
       description: curr_card.description,
-      labels: curr_card.labels,
+      label: curr_card.label,
     });
   }
 
@@ -92,14 +93,18 @@ class UpdateCard extends Component {
               <FormLabel>
                 <b>Labels</b>
               </FormLabel>
-              <Input
-                id="labels"
+              <Select
+                id="label"
                 type="text"
                 onChange={this.onChange}
-                value={this.state.labels}
+                value={this.state.label}
                 variant="flushed"
                 focusBorderColor="#80cbc4"
-              />
+              >
+                {this.props.auth.user.labels.map((label) => (
+                  <option key={label}>{label}</option>
+                ))}
+              </Select>
             </FormControl>
           </ModalBody>
           <ModalFooter>
@@ -127,4 +132,9 @@ class UpdateCard extends Component {
   }
 }
 
-export default connect(null, { updateCard })(withRouter(UpdateCard));
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  errors: state.errors,
+});
+
+export default connect(mapStateToProps, { updateCard })(withRouter(UpdateCard));

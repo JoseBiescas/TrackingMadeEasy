@@ -16,6 +16,10 @@ const UserSchema = new Schema(
       type: String,
       required: true,
     },
+    labels: {
+      type: [String],
+      required: true,
+    }
   },
   {
     timestamps: true,
