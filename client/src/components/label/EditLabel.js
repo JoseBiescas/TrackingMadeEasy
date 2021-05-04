@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Button,
   Modal,
@@ -13,47 +13,57 @@ import {
   Input,
   Flex,
   Checkbox,
-  Spacer,
-  list,
 } from "@chakra-ui/react";
 
-import { createLabel } from "../../actions/authActions";
+import { createLabel, deleteLabel } from "../../actions/authActions";
 import { useSelector, useDispatch } from "react-redux";
+import isEmpty from "is-empty";
 
 const EditLabel = (props) => {
   //Props
   const { editLabel, onClose, userId, labels } = props;
 
-  //State
-  const [label, setLabel] = useState("");
-
   //Redux
-  const state = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
-  const listToDelete = [];
+  var listToDelete = [];
+
+  //State
+  const [label, setLabel] = useState("");
+  const [onDeleteLabel, setDeleteLabel] = useState(false);
+  const [onCreateLabel, setCreateLabel] = useState(false);
 
   //Submit
-  const onSubmit = (data, onClose) => {
+  const onSubmit = async (data, onClose) => {
+    setCreateLabel(true);
     let res;
-    res = dispatch(createLabel(data));
+    res = await dispatch(createLabel(data));
+    setCreateLabel(false);
     onClose();
   };
 
-  const onDelete = (listToDelete) => {
-
-  }
+  const onDelete = async (labelsToDelete) => {
+    if (isEmpty(labelsToDelete.labels)) {
+      return;
+    } else {
+      setDeleteLabel(true);
+      let res;
+      res = await dispatch(deleteLabel(labelsToDelete));
+      setDeleteLabel(false);
+      listToDelete = [];
+    }
+  };
 
   const toDelete = (label) => {
     if (listToDelete.includes(label)) {
-      const index = listToDelete.indexOf(label)
+      const index = listToDelete.indexOf(label);
       if (index > -1) {
-        listToDelete.splice(index, 1)
+        listToDelete.splice(index, 1);
       }
     } else {
       listToDelete.push(label);
     }
-  }
+  };
 
   return (
     <Modal isOpen={editLabel} onClose={onClose}>
@@ -64,7 +74,11 @@ const EditLabel = (props) => {
         <ModalBody>
           <Flex flexDir="column">
             {labels.map((label) => (
-              <Checkbox onChange={() => toDelete(label)} colorScheme="red">
+              <Checkbox
+                isDisabled={labels.length === 1}
+                onChange={() => toDelete(label)}
+                colorScheme="red"
+              >
                 {label}
               </Checkbox>
             ))}
@@ -72,7 +86,14 @@ const EditLabel = (props) => {
           <br />
         </ModalBody>
         <ModalFooter>
-          <Button bg="#80cbc4" borderRadius="12px" color="black" onClick={() => onDelete(listToDelete)}>
+          <Button
+            isLoading={onDeleteLabel}
+            loadingText="Deleting Labels..."
+            bg="#80cbc4"
+            borderRadius="12px"
+            color="black"
+            onClick={() => onDelete({ labels: listToDelete, user_id: userId })}
+          >
             Delete
           </Button>
         </ModalFooter>
@@ -93,6 +114,8 @@ const EditLabel = (props) => {
         </ModalBody>
         <ModalFooter>
           <Button
+            isLoading={onCreateLabel}
+            loadingText="Saving Label"
             bg="#80cbc4"
             borderRadius="12px"
             color="black"

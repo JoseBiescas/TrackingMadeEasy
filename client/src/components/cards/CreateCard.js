@@ -175,7 +175,7 @@ class CreateCard extends Component {
                   color="black"
                   onClick={this.toggleModal}
                 >
-                  Create Label
+                  Edit Label
                 </Button>
               </Flex>
             </form>

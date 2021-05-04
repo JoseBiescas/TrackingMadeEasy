@@ -7,7 +7,8 @@ passed to our store and, in turn, our UI.
 import {
     SET_CURRENT_USER,
     USER_LOADING,
-    CREATE_LABEL
+    CREATE_LABEL,
+    DELETE_LABEL,
 } from "../actions/types";
 
 const isEmpty = require('is-empty');
@@ -37,6 +38,14 @@ export default function(state = initialState, action) {
                 user: {
                     ...state.user,
                     labels: [...state.user.labels, action.payload]
+                }
+            }
+        case DELETE_LABEL:
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    labels: state.user.labels.filter(label => !action.payload.includes(label))
                 }
             }
         default:

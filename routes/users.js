@@ -38,6 +38,22 @@ router.patch(
   }
 );
 
+//Delete Label Route
+router.patch(
+  "/delete_label/:user_id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    User.findByIdAndUpdate(
+      { _id: req.params.user_id },
+      { $pullAll: { labels: req.body.labels } }
+    )
+      .then((response) => {
+        res.json("Success");
+      })
+      .catch((err) => res.status(400).json("Error: " + err));
+  }
+);
+
 //Register route
 router.post("/register", (req, res) => {
   // pull in errors and isValid from our Register validator.
